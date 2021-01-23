@@ -1,0 +1,111 @@
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Misc
+*.map
+*.m
+*.png
+
+# Eclipse CDT project files
+.cproject
+.project
+.settings/
+
+# Vagrant directory
+.vagrant/
+
+# Include makefiles
+!Makefile
+*~
+
+# Libraries
+/lib
+
+# Debug files
+*.dSYM/
+
+*.bak
+*.scvd
+*.ini
+*.Administrator
+*.hp
+*.uvoptx
+
+DebugConfig/  
+OBJ/
+
+*.pyc
+*.map
+*.dblite
+*.elf
+*.bin
+*.hex
+*.axf
+*.exe
+*.pdb
+*.idb
+*.ilk
+*.old
+build
+Debug
+OBJ
+documentation/html
+packages/
+*~
+*.o
+*.obj
+*.out
+*.bak
+*.dep
+*.lib
+*.i
+*.d
+.DS_Stor*
+.config 3
+.config 4
+.config 5
+Midea-X1
+*.uimg
+GPATH
+GRTAGS
+GTAGS
+.vscode
+JLinkLog.txt
+JLinkSettings.ini
+DebugConfig/
+RTE/
+settings/
+*.uvguix*
+cconfig.h
+*.orig
+*.crf
+*.d
+*.__i
+*.plg
