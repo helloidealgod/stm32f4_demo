@@ -1,74 +1,59 @@
-#include "sys.h"
-#include "delay.h"
-#include "usart.h"
 #include "led.h"
+#include "delay.h"
+#include "key.h"
+#include "sys.h"
+#include "lcd.h"
+#include "usart.h"
 
+ 
 /************************************************
- ALIENTEK精英STM32开发板实验1
- 跑马灯实验
+ ALIENTEK精英STM32开发板实验13
+ TFTLCD显示实验  
  技术支持：www.openedv.com
  淘宝店铺：http://eboard.taobao.com 
  关注微信公众平台微信号："正点原子"，免费获取STM32资料。
  广州市星翼电子科技有限公司  
  作者：正点原子 @ALIENTEK
 ************************************************/
+
  int main(void)
- {	
-	delay_init();	    //延时函数初始化	  
-	LED_Init();		  	//初始化与LED连接的硬件接口
-	while(1)
-	{
-		LED0=0;
-		LED1=1;
-		delay_ms(300);	 //延时300ms
-		LED0=1;
-		LED1=0;
-		delay_ms(300);	//延时300ms
-	}
- }
-
-
- /**
- *****************下面注视的代码是通过调用库函数来实现IO控制的方法*****************************************
-int main(void)
-{ 
+ {	 
+ 	u8 x=0;
+	u8 lcd_id[12];			//存放LCD ID字符串
+	delay_init();	    	 //延时函数初始化	  
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);	 //设置NVIC中断分组2:2位抢占优先级，2位响应优先级
+	uart_init(115200);	 	//串口初始化为115200
+ 	LED_Init();			     //LED端口初始化
+	LCD_Init();
+	POINT_COLOR=RED;
+	sprintf((char*)lcd_id,"LCD ID:%04X",lcddev.id);//将LCD ID打印到lcd_id数组。 
+  	while(1) 
+	{		 
+		switch(x)
+		{
+			case 0:LCD_Clear(WHITE);break;
+			case 1:LCD_Clear(BLACK);break;
+			case 2:LCD_Clear(BLUE);break;
+			case 3:LCD_Clear(RED);break;
+			case 4:LCD_Clear(MAGENTA);break;
+			case 5:LCD_Clear(GREEN);break;
+			case 6:LCD_Clear(CYAN);break; 
+			case 7:LCD_Clear(YELLOW);break;
+			case 8:LCD_Clear(BRRED);break;
+			case 9:LCD_Clear(GRAY);break;
+			case 10:LCD_Clear(LGRAY);break;
+			case 11:LCD_Clear(BROWN);break;
+		}
+		POINT_COLOR=RED;	  
+		LCD_ShowString(30,40,210,24,24,"Elite STM32F1 ^_^"); 
+		LCD_ShowString(30,70,200,16,16,"TFTLCD TEST");
+		LCD_ShowString(30,90,200,16,16,"ATOM@ALIENTEK");
+ 		LCD_ShowString(30,110,200,16,16,lcd_id);		//显示LCD ID	      					 
+		LCD_ShowString(30,130,200,12,12,"2015/1/14");	      					 
+	    x++;
+		if(x==12)x=0;
+		LED0=!LED0;				   		 
+		delay_ms(1000);	
+	} 
+}
  
-	delay_init();		  //初始化延时函数
-	LED_Init();		        //初始化LED端口
-	while(1)
-	{
-			GPIO_ResetBits(GPIOB,GPIO_Pin_5);  //LED0对应引脚GPIOB.5拉低，亮  等同LED0=0;
-			GPIO_SetBits(GPIOE,GPIO_Pin_5);   //LED1对应引脚GPIOE.5拉高，灭 等同LED1=1;
-			delay_ms(300);  		   //延时300ms
-			GPIO_SetBits(GPIOB,GPIO_Pin_5);	   //LED0对应引脚GPIOB.5拉高，灭  等同LED0=1;
-			GPIO_ResetBits(GPIOE,GPIO_Pin_5); //LED1对应引脚GPIOE.5拉低，亮 等同LED1=0;
-			delay_ms(300);                     //延时300ms
-	}
-} 
- 
- ****************************************************************************************************
- ***/
- 
-
-	
-/**
-*******************下面注释掉的代码是通过 直接操作寄存器 方式实现IO口控制**************************************
-int main(void)
-{ 
- 
-	delay_init();		  //初始化延时函数
-	LED_Init();		        //初始化LED端口
-	while(1)
-	{
-     GPIOB->BRR=GPIO_Pin_5;//LED0亮
-	   GPIOE->BSRR=GPIO_Pin_5;//LED1灭
-		 delay_ms(300);
-     GPIOB->BSRR=GPIO_Pin_5;//LED0灭
-	   GPIOE->BRR=GPIO_Pin_5;//LED1亮
-		 delay_ms(300);
-
-	 }
- }
-**************************************************************************************************
-**/
-
