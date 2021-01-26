@@ -1,14 +1,6 @@
 #ifndef _OV7725CFG_H
 #define _OV7725CFG_H
-#include "ov7725.h"	
-//////////////////////////////////////////////////////////////////////////////////
-//ALIENTEK精英STM32开发板
-//OV7725 驱动代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//修改日期:2017/11/1
-//版本：V1.0		    							    							  
-//////////////////////////////////////////////////////////////////////////////////
+#include "ov7725.h"
 
 /* OV7725寄存器宏定义 */
 #define GAIN      0x00
@@ -82,7 +74,7 @@
 #define LC_YC     0x48
 #define LC_COEF   0x49
 #define LC_RADI   0x4A
-#define LC_COEFB  0x4B 
+#define LC_COEFB  0x4B
 #define LC_COEFR  0x4C
 #define FixGain   0x4D
 #define AREF1     0x4F
@@ -116,7 +108,7 @@
 #define AWBCtrl18 0x7A
 #define AWBCtrl19 0x7B
 #define AWBCtrl20 0x7C
-#define AWBCtrl21 0x7D 
+#define AWBCtrl21 0x7D
 #define GAM1      0x7E
 #define GAM2      0x7F
 #define GAM3      0x80
@@ -162,8 +154,7 @@
 #define DSPAuto   0xAC
 
 //初始化寄存器序列及其对应的值
-const u8 ov7725_init_reg_tb1[][2]= 
-{   
+const u8 ov7725_init_reg_tb1[][2]= {
 	/*输出窗口设置*/
 	{CLKRC,     0x00}, //clock config
 	{COM7,      0x46}, //QVGA RGB565
@@ -174,7 +165,7 @@ const u8 ov7725_init_reg_tb1[][2]=
 	{HREF,      0x00},
 	{HOutSize,  0x50}, //输出尺寸
 	{VOutSize,  0x78}, //输出尺寸
-	
+
 	/*DSP control*/
 	{TGT_B,     0x7f},
 	{FixGain,   0x09},
@@ -197,7 +188,7 @@ const u8 ov7725_init_reg_tb1[][2]=
 	{EXHCL,		0x9e},
 	{AWBCtrl3,  0xaa},
 	{COM8,		0xff},
-	
+
 	/*matrix shapness brightness contrast*/
 	{EDGE1,		0x08},
 	{DNSOff,	0x01},
@@ -218,8 +209,8 @@ const u8 ov7725_init_reg_tb1[][2]=
 	{VSAT,		0x65},
 	{HUECOS,	0X80},
 	{HUESIN, 	0X80},
-	
-    /*GAMMA config*/
+
+	/*GAMMA config*/
 	{GAM1,		0x0c},
 	{GAM2,		0x16},
 	{GAM3,		0x2a},
@@ -237,14 +228,14 @@ const u8 ov7725_init_reg_tb1[][2]=
 	{GAM15,		0xe8},
 	{SLOP,		0x20},
 
-	
+
 	{COM3,		0x50},/*Horizontal mirror image*/
-					  //注：datasheet默认0x10,即改变YUV为UVY格式。但是摄像头不是芯片而是模组时，
-					  //要将0X10中的1变成0，即设置YUV格式。
-	/*night mode auto frame rate control*/ 
+	//注：datasheet默认0x10,即改变YUV为UVY格式。但是摄像头不是芯片而是模组时，
+	//要将0X10中的1变成0，即设置YUV格式。
+	/*night mode auto frame rate control*/
 	{COM5,		0xf5},	 /*在夜视环境下，自动降低帧率，保证低照度画面质量*/
 	//{COM5,		0x31},	/*夜视环境帧率不变*/
-	
+
 };
 
 #endif
