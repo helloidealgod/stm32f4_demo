@@ -351,7 +351,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\FWLIB\inc;..\FWLIB\src;..\HARDWARE\LED;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\user;..\STM32F10x_FWLib\inc;..\STM32F10x_FWLib\src;..\HARDWARE\KEY;..\HARDWARE\LCD</IncludePath>
+              <IncludePath>..\CORE;..\FWLIB\inc;..\FWLIB\src;..\HARDWARE\LED;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\user;..\STM32F10x_FWLib\inc;..\STM32F10x_FWLib\src;..\HARDWARE\KEY;..\HARDWARE\LCD;..\HARDWARE\OV7725</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -486,6 +486,16 @@
               <FileName>lcd.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\LCD\lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>ov7725.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\OV7725\ov7725.c</FilePath>
+            </File>
+            <File>
+              <FileName>sccb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\OV7725\sccb.c</FilePath>
             </File>
           </Files>
         </Group>
