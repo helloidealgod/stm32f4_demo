@@ -63,6 +63,12 @@ int main(void) {
 	u8 lightmode=0,effect=0;
 	s8 saturation=0,brightness=0,contrast=0;
 
+	u8 sensor=0;
+	u8 key;
+	u8 i=0;
+	u8 msgbuf[15];//消息缓存区
+	u8 tm=0;
+
 	delay_init();	    	 //延时函数初始化
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);	 //设置NVIC中断分组2:2位抢占优先级，2位响应优先级
 	uart_init(115200);	 	//串口初始化为115200
@@ -70,12 +76,12 @@ int main(void) {
 	LCD_Init();
 
 	sprintf((char*)lcd_id,"LCD ID:%04X",lcddev.id);//将LCD ID打印到lcd_id数组。
-	while(1) {
+
+	while(1) { //初始化OV7725_OV7670
 		if(OV7725_Init()==0) {
-			LCD_ShowString(30,40,210,24,24,"OV7725 Init OK       ");
 			OV7725_Window_Set(OV7725_WINDOW_WIDTH,OV7725_WINDOW_HEIGHT,0);//QVGA模式输出
-			LCD_ShowString(30,70,210,24,24,"OV7725 Set QVGA OK   ");
 			//OV7725_Window_Set(OV7725_WINDOW_WIDTH,OV7725_WINDOW_HEIGHT,1);//VGA模式输出
+			LCD_ShowString(30,210,200,16,16,"OV7725 Init OK       ");
 
 			OV7725_Light_Mode(lightmode);
 			OV7725_Color_Saturation(saturation);
@@ -83,15 +89,24 @@ int main(void) {
 			OV7725_Contrast(contrast);
 			OV7725_Special_Effects(effect);
 			OV7725_CS=0;
+			break;
 		} else {
-			LCD_ShowString(30,40,210,24,24,"OV7725 Init Failed   ");
+			LCD_ShowString(30,210,200,16,16,"OV7725_OV7670 Error!!");
+			delay_ms(200);
+			LCD_Fill(30,210,239,246,WHITE);
+			delay_ms(200);
 		}
+	}
 
-		TIM6_Int_Init(10000,7199);			//10Khz计数频率,1秒钟中断
-		EXTI8_Init();										//使能外部中断8,捕获帧中断
-		LCD_Clear(BLACK);
-
-		LED0=!LED0;
-		delay_ms(1000);
+	//TIM6_Int_Init(10000,7199);			//10Khz计数频率,1秒钟中断
+	EXTI8_Init();						//使能外部中断8,捕获帧中断
+	LCD_Clear(BLACK);
+	while(1) {
+		OV7725_camera_refresh();		//更新显示
+		if(tm) {
+			LCD_ShowString((lcddev.width-240)+30,(lcddev.height-320)+60,200,16,16,msgbuf);
+			tm--;
+		}
+		delay_ms(500);
 	}
 }
