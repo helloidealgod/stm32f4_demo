@@ -107,6 +107,6 @@ int main(void) {
 			LCD_ShowString((lcddev.width-240)+30,(lcddev.height-320)+60,200,16,16,msgbuf);
 			tm--;
 		}
-		delay_ms(500);
+		delay_ms(40);
 	}
 }
