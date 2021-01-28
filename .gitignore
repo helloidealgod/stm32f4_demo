@@ -108,3 +108,8 @@ cconfig.h
 *.d
 *.__i
 *.plg
+*.dep
+*.map
+*.lnp
+*.lst
+*.sct
