@@ -5,7 +5,6 @@
 #include "lcd.h"
 #include "usart.h"
 #include "ov7725.h"
-
 #include "string.h"
 #include "timer.h"
 #include "exti.h"
@@ -77,7 +76,7 @@ int main(void) {
 
 	sprintf((char*)lcd_id,"LCD ID:%04X",lcddev.id);//将LCD ID打印到lcd_id数组。
 
-	while(1) { //初始化OV7725_OV7670
+	while(1) {
 		if(OV7725_Init()==0) {
 			OV7725_Window_Set(OV7725_WINDOW_WIDTH,OV7725_WINDOW_HEIGHT,0);//QVGA模式输出
 			//OV7725_Window_Set(OV7725_WINDOW_WIDTH,OV7725_WINDOW_HEIGHT,1);//VGA模式输出
@@ -101,12 +100,9 @@ int main(void) {
 	//TIM6_Int_Init(10000,7199);			//10Khz计数频率,1秒钟中断
 	EXTI8_Init();						//使能外部中断8,捕获帧中断
 	LCD_Clear(BLACK);
+	//LCD_Fill(0,0,459,600,WHITE);
 	while(1) {
 		OV7725_camera_refresh();		//更新显示
-		if(tm) {
-			LCD_ShowString((lcddev.width-240)+30,(lcddev.height-320)+60,200,16,16,msgbuf);
-			tm--;
-		}
 		delay_ms(40);
 	}
 }
