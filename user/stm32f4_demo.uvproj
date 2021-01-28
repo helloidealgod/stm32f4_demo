@@ -349,9 +349,9 @@
             <uSurpInc>0</uSurpInc>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
+              <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\FWLIB\inc;..\FWLIB\src;..\HARDWARE\LED;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\user;..\STM32F10x_FWLib\inc;..\STM32F10x_FWLib\src;..\HARDWARE\KEY;..\HARDWARE\LCD;..\HARDWARE\OV7725</IncludePath>
+              <IncludePath>..\CORE;..\FWLIB\inc;..\FWLIB\src;..\HARDWARE\LED;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\user;..\STM32F10x_FWLib\inc;..\STM32F10x_FWLib\src;..\HARDWARE\KEY;..\HARDWARE\LCD;..\HARDWARE\OV7725;..\HARDWARE\EXTI;..\HARDWARE\BEEP;..\HARDWARE\TIMER</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -496,6 +496,21 @@
               <FileName>sccb.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\OV7725\sccb.c</FilePath>
+            </File>
+            <File>
+              <FileName>exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\EXTI\exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>beep.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\BEEP\beep.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\TIMER\timer.c</FilePath>
             </File>
           </Files>
         </Group>

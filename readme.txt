@@ -1,4 +1,5 @@
 STM32F1 精英版 uversion4
 
 c/c++/Define:USE_STDPERIPH_DRIVER,STM32F10X_MD
+修改为(stm32f10x.h TIM6_IRQn 定义)：USE_STDPERIPH_DRIVER,STM32F10X_HD
 include Paths:
